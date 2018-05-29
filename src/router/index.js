@@ -14,7 +14,13 @@ const login = () => import('@/views/login/index')
 const Layout = () => import('@/views/layout/index')
 const dashboard = () => import('@/views/dashboard/index')
 const accountRight = () => import('@/views/account/index')
-const tree = () => import('@/views/tree/index')
+const gameData = () => import('@/views/dataManage/game')
+const userData = () => import('@/views/dataManage/user')
+const rechargeData = () => import('@/views/dataManage/recharge')
+const distributeData = () => import('@/views/dataManage/distribute')
+const pcData = () => import('@/views/dataManage/pc')
+const websiteData = () => import('@/views/dataManage/website')
+
 const form = () => import('@/views/form/index')
 
 
@@ -53,16 +59,54 @@ export const constantRouterMap = [
         name: 'Account',
         component: accountRight,
         meta: { title: '账户管理', icon: 'el-icon-setting' }
-      },
-      // {
-      //   path: 'tree',
-      //   name: 'Tree',
-      //   component: tree,
-      //   meta: { title: 'Tree', icon: 'tree' }
-      // }
+      }
     ]
   },
+  {
+    path:'/data',
+    component: Layout,
+    name:'Data',
+    meta: { title: '数据管理', icon: 'el-icon-menu' },
+    children:[
+      {
+        path:'game',
+        name:'GameData',
+        component: gameData,
+        meta: { title: '游戏数据', icon: '' },
+      },
+      {
+        path:'user',
+        name:'UserData',
+        component: userData,
+        meta: { title: '用户数据', icon: '' },
+      },
+      {
+        path:'distribute',
+        name:'DistributeData',
+        component: distributeData,
+        meta: { title: '分发渠道数据', icon: '' },
+      },
+      {
+        path:'recharge',
+        name:'RechargeData',
+        component: rechargeData,
+        meta: { title: '充值数据', icon: '' },
+      },
+      {
+        path:'website',
+        name:'WebsiteData',
+        component: websiteData,
+        meta: { title: '网站数据', icon: '' },
+      },
+      {
+        path:'pc',
+        name:'PcData',
+        component: pcData,
+        meta: { title: 'PC客户端数据', icon: '' },
+      }
+    ]
 
+  },
   {
     path: '/form',
     component: Layout,
@@ -89,27 +133,27 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   document.title = to.meta.title;
 
-  store.dispatch('GetInfo').then(
-    (resData) => {
-      localStorage.removeItem('username');
-      if(resData && resData.status == 'ok'){
+  // store.dispatch('GetInfo').then(
+  //   (resData) => {
+  //     localStorage.removeItem('username');
+  //     if(resData && resData.status == 'ok'){
        
-        localStorage.setItem('username', resData.data.username);
-        next();
-        NProgress.done()
-      }else{
-        localStorage.removeItem('username');
-        next({ path: '/login' })
-        NProgress.done()
-      }
-    }
-  ).catch( (err) => {
-    localStorage.removeItem('username');
-    store.dispatch('FedLogOut').then(() => {
-      Message.error('验证失败,请重新登录')
-      next({ path: '/login' })
-    })
-  })
+  //       localStorage.setItem('username', resData.data.username);
+  //       next();
+  //       NProgress.done()
+  //     }else{
+  //       localStorage.removeItem('username');
+  //       next({ path: '/login' })
+  //       NProgress.done()
+  //     }
+  //   }
+  // ).catch( (err) => {
+  //   localStorage.removeItem('username');
+  //   store.dispatch('FedLogOut').then(() => {
+  //     Message.error('验证失败,请重新登录')
+  //     next({ path: '/login' })
+  //   })
+  // })
   next();
   // if (getToken()) {
   //   if (to.path === '/login') {

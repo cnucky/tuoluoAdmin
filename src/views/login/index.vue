@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
       class="card-box login-form">
-      <h3 class="title">量子加速器管理系统</h3>
+      <h3 class="title">陀螺加速器管理系统</h3>
       <el-form-item prop="username">
         
         <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="用户名" />
@@ -68,20 +68,20 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          // this.$router.push({ path: '/' });
-          this.$store.dispatch('Login', this.loginForm).then(
-            (resData) => {
-              //console.log(resData);
-              if(resData && resData.status == 'ok'){
-                this.$router.push({ path: '/' });
-              }else{
-                this.$message.error(resData.message);
-              }
-              this.loading = false;
-            }
-          ).catch(() => {
-            this.loading = false;
-          })
+          this.$router.push({ path: '/' });
+          // this.$store.dispatch('Login', this.loginForm).then(
+          //   (resData) => {
+          //     //console.log(resData);
+          //     if(resData && resData.status == 'ok'){
+          //       this.$router.push({ path: '/' });
+          //     }else{
+          //       this.$message.error(resData.message);
+          //     }
+          //     this.loading = false;
+          //   }
+          // ).catch(() => {
+          //   this.loading = false;
+          // })
         } else {
           return false;
         }
