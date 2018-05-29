@@ -20,9 +20,11 @@ const rechargeData = () => import('@/views/dataManage/recharge')
 const distributeData = () => import('@/views/dataManage/distribute')
 const pcData = () => import('@/views/dataManage/pc')
 const websiteData = () => import('@/views/dataManage/website')
-
-const form = () => import('@/views/form/index')
-
+const inStation = () => import('@/views/inStation/index')
+const serverManage = () => import('@/views/serverManage/index')  //服务器管理
+const versionManage = () => import('@/views/versionManage/index')  //版本管理
+const cms = () => import('@/views/cms/index')  //服务器管理
+const feedbackManage = () => import('@/views/feedbackManage/index')  //反馈管理
 
 
 /**
@@ -47,21 +49,7 @@ export const constantRouterMap = [
       meta: { title: '控制台', icon: 'el-icon-menu' }
     }]
   },
-  {
-    path: '/account',
-    component: Layout,
-    redirect: '/account/account_right',
-    name: 'Account',
-    // meta: { title: '用户权限', icon: 'el-icon-menu' },
-    children: [
-      {
-        path: 'account_right',
-        name: 'Account',
-        component: accountRight,
-        meta: { title: '账户管理', icon: 'el-icon-setting' }
-      }
-    ]
-  },
+  
   {
     path:'/data',
     component: Layout,
@@ -108,17 +96,84 @@ export const constantRouterMap = [
 
   },
   {
-    path: '/form',
+    path: '/instation',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: form,
-        meta: { title: '导航二', icon: 'el-icon-star-on' }
+        path: '',
+        name: 'InStation',
+        component: inStation,
+        meta: { title: '站内信', icon: 'el-icon-star-on' }
       }
     ]
   },
+  {
+    path: '/server',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'ServerManage',
+        component: serverManage,
+        meta: { title: '服务器管理', icon: 'el-icon-goods' }
+      }
+    ]
+  },
+  {
+    path: '/cms',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Cms',
+        component: cms,
+        meta: { title: 'CMS', icon: 'el-icon-tickets' }
+      }
+    ]
+  },
+  {
+    path: '/version',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'VersionManage',
+        component: versionManage,
+        meta: { title: '版本管理', icon: 'el-icon-mobile-phone' }
+      }
+    ]
+  },
+  {
+    path: '/feedback',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'FeedbackManage',
+        component: feedbackManage,
+        meta: { title: '反馈管理', icon: 'el-icon-remove-outline' }
+      }
+    ]
+  },
+  {
+    path: '/account',
+    component: Layout,
+    redirect: '/account/account_right',
+    name: 'Account',
+    // meta: { title: '用户权限', icon: 'el-icon-menu' },
+    children: [
+      {
+        path: '',
+        name: 'Account',
+        component: accountRight,
+        meta: { title: '角色管理', icon: 'el-icon-setting' }
+      }
+    ]
+  },
+
+  
+
+  
   { path: '*', redirect: '/404', hidden: true }
 ]
 
