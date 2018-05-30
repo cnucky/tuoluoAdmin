@@ -1,24 +1,33 @@
 <template>
   <div class="login-container">
-    <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
-      class="card-box login-form">
-      <h3 class="title">陀螺加速器管理系统</h3>
-      <el-form-item prop="username">
-        
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="用户名" />
-      </el-form-item>
-      <el-form-item prop="password">
-        
-        <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
-          placeholder="密码"></el-input>
-          <span class="show-pwd" @click="showPwd"><i class="el-icon-view"></i></span>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
-          登录
-        </el-button>
-      </el-form-item>
-    </el-form>
+    <div class="left">
+      <div class="logo">
+        <img width="100%" src="../../assets/logo.png" alt="">
+        <div class="name">陀螺加速器</div> 
+        <div class="sys">后台管理系统</div>
+      </div>
+    </div>
+    <div class="right">
+      <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
+        class="card-box login-form">
+
+        <el-form-item prop="username">
+          <label for="">用户名</label>
+          <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="请输入您的手机号" />
+        </el-form-item>
+        <el-form-item prop="password">
+          <label for="">密码</label>
+          <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
+            placeholder="请输入您的密码"></el-input>
+            <span class="show-pwd" @click="showPwd"><i class="el-icon-view"></i></span>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" class="login_btn" :loading="loading" @click.native.prevent="handleLogin">
+            登 录
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </div> 
   </div>
 </template>
 
@@ -68,20 +77,20 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          this.$router.push({ path: '/' });
-          // this.$store.dispatch('Login', this.loginForm).then(
-          //   (resData) => {
-          //     //console.log(resData);
-          //     if(resData && resData.status == 'ok'){
-          //       this.$router.push({ path: '/' });
-          //     }else{
-          //       this.$message.error(resData.message);
-          //     }
-          //     this.loading = false;
-          //   }
-          // ).catch(() => {
-          //   this.loading = false;
-          // })
+          // this.$router.push({ path: '/' });
+          this.$store.dispatch('Login', this.loginForm).then(
+            (resData) => {
+              //console.log(resData);
+              if(resData && resData.status == 'ok'){
+                this.$router.push({ path: '/' });
+              }else{
+                this.$message.error(resData.message);
+              }
+              this.loading = false;
+            }
+          ).catch(() => {
+            this.loading = false;
+          })
         } else {
           return false;
         }
@@ -101,6 +110,36 @@ export default {
     @include relative;
     height: 100vh;
     background-color: $bg;
+    .left{
+      background: #fff;
+      width: 35%;
+      height: 100%;
+      float: left;
+      text-align: center;
+      .logo{
+        width: 160px;
+        margin: 140px auto 0 auto;
+        img{
+          margin: 0 0 60px 0;
+        }
+        .name{
+          text-align: left;
+          font-size: 22px;
+        }
+        .sys{
+          font-size: 26px;
+          text-align: left;
+          font-weight: 700;
+        }
+      }
+    }
+    .right{
+      float: left;
+      width: 65%;
+      height: 100%;
+      position: relative;
+      background: url('../../assets/logbg.jpg') no-repeat;
+    }
     input:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px #293444 inset !important;
       -webkit-text-fill-color: #fff !important;
@@ -110,7 +149,7 @@ export default {
       border: 0px;
       -webkit-appearance: none;
       border-radius: 0px;
-      padding: 12px 5px 12px 15px;
+      padding: 12px 5px 12px 0;
       color: $light_gray;
       height: 47px;
     }
@@ -151,17 +190,26 @@ export default {
       margin: 120px auto;
     }
     .el-form-item {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      color: #454545;
+      &:not(:last-child){
+        border-bottom: 1px solid #fff;
+        // background: rgba(0, 0, 0, 0.1);
+        color: #454545;
+        text-align: left;
+        label{
+          color:#fff;
+        }
+      }
+      .login_btn{
+        font-size: 16px;
+        width: 100%;
+      }
     }
     .show-pwd {
       position: absolute;
       right: 10px;
-      top: 7px;
+      top: 45px;
       font-size: 16px;
-      color: $dark_gray;
+      color: #eee;
       cursor: pointer;
       user-select:none;
     }

@@ -54,7 +54,7 @@ export const constantRouterMap = [
     path:'/data',
     component: Layout,
     name:'Data',
-    meta: { title: '数据管理', icon: 'el-icon-menu' },
+    meta: { title: '数据管理', icon: 'el-icon-message' },
     children:[
       {
         path:'game',
@@ -188,27 +188,28 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   document.title = to.meta.title;
 
-  // store.dispatch('GetInfo').then(
-  //   (resData) => {
-  //     localStorage.removeItem('username');
-  //     if(resData && resData.status == 'ok'){
-       
-  //       localStorage.setItem('username', resData.data.username);
-  //       next();
-  //       NProgress.done()
-  //     }else{
-  //       localStorage.removeItem('username');
-  //       next({ path: '/login' })
-  //       NProgress.done()
-  //     }
-  //   }
-  // ).catch( (err) => {
-  //   localStorage.removeItem('username');
-  //   store.dispatch('FedLogOut').then(() => {
-  //     Message.error('验证失败,请重新登录')
-  //     next({ path: '/login' })
-  //   })
-  // })
+  store.dispatch('GetInfo').then(
+    (resData) => {
+      localStorage.removeItem('username');
+      if(resData && resData.status == 'ok'){
+        localStorage.setItem('username', resData.data.username);
+         if(to.path == '/login'){
+          next('/dashboard');
+         }
+         NProgress.done()
+      }else{
+        localStorage.removeItem('username');
+        next({ path: '/login' })
+        NProgress.done()
+      }
+    }
+  ).catch( (err) => {
+    localStorage.removeItem('username');
+    store.dispatch('FedLogOut').then(() => {
+      Message.error('验证失败,请重新登录')
+      next({ path: '/login' })
+    })
+  })
   next();
   // if (getToken()) {
   //   if (to.path === '/login') {

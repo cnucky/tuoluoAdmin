@@ -2,22 +2,21 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
-        <img class="user-avatar" src="../../assets/avatar.jpg" width="50px">
-        <i class="el-icon-caret-bottom"></i>
-      </div>
-      <el-dropdown-menu class="user-dropdown" slot="dropdown">
-          <el-dropdown-item>
-            
-           <span>{{username}}</span>
-           
+    <div class="user_info">
+      <div class="username">{{username}}</div>
+      <el-dropdown class="avatar-container" trigger="click">
+        
+        <div class="avatar-wrapper">
+          <img class="user-avatar" src="../../assets/avatar.jpg" width="50px">
+          <i class="el-icon-caret-bottom"></i>
+        </div>
+        <el-dropdown-menu class="user-dropdown" slot="dropdown">
+          <el-dropdown-item divided>
+            <span @click="logout" style="display:block;">退出</span>
           </el-dropdown-item>
-        <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">退出</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div> 
   </el-menu>
 </template>
 
@@ -43,7 +42,9 @@ export default {
     ])
   },
   mounted () {
+    
     this.username =  localStorage.getItem('username');
+    console.log('用户',this.username);
   },
   methods: {
     toggleSideBar() {
@@ -61,7 +62,6 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   height: 50px;
-  line-height: 50px;
   border-radius: 0px !important;
   .hamburger-container {
     line-height: 58px;
@@ -75,14 +75,27 @@ export default {
     top: 16px;
     color: red;
   }
+  .user_info{
+    float: right;
+    min-width: 125px;
+    max-width: 600px;
+    line-height: 50px;
+    .username{
+      float: left;
+      margin: 0 80px 0 0;
+    }
+  }
   .avatar-container {
     height: 50px;
+    float: left;
     display: inline-block;
     position: absolute;
     right: 35px;
+    
     .avatar-wrapper {
       cursor: pointer;
       margin-top: 5px;
+      
       position: relative;
       .user-avatar {
         width: 40px;

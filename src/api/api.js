@@ -1,12 +1,12 @@
 import { fetch } from '@/api/index'
 
 //登录
-export const login = (reqData) => fetch('POST','/adminapi/login/',{data: reqData})
+export const login = (reqData) => fetch('POST','/api/admin/login/',{data: reqData})
 //退出
 export const loginOut = () => fetch('GET','/adminapi/logout/')
 
 //判断用户是否登录
-export const checkLogin = () => fetch('GET','/adminapi/auth_info/')
+export const checkLogin = () => fetch('GET','/api/admin/auth_info/')
 
 //获取用户
 export const getCustomers = () => fetch('GET','/adminapi/customers/')
