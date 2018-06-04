@@ -1,5 +1,5 @@
 <template>
-    <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse" :router="true" background-color="#304156" text-color="#fff" active-text-color="#409EFF" class="menu-wrapper"> 
+    <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse" :router="true" background-color="#304156" text-color="#fff" active-text-color="#00ccff" class="menu-wrapper"> 
       <template v-for="item in routes" v-if="!item.hidden&&item.children">   
         
         <el-menu-item v-if="item.children.length===1 && !item.children[0].children" :index="item.path+'/'+item.children[0].path" :key="item.children[0].name" class='submenu-title-noDropdown'>
