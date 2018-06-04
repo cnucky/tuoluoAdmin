@@ -18,6 +18,9 @@ export let fetch = (method, url, data) => {
                 resolve(response.data);
             }
         }).catch( err => {
+            if(err.response.status == 401){
+                Message.error('请登录')
+            }
             reject(err);
         })
     })

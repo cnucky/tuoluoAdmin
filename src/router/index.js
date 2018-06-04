@@ -239,55 +239,30 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   document.title = to.meta.title;
 
-  store.dispatch('GetInfo').then(
-    (resData) => {
-      localStorage.removeItem('username');
-      if(resData && resData.status == 'ok'){
-        localStorage.setItem('username', resData.data.username);
-         if(to.path == '/login'){
-          next('/dashboard');
-         }
-         NProgress.done()
-      }else{
+  if(to.path != '/login'){
+    store.dispatch('GetInfo').then(
+      (resData) => {
+        localStorage.removeItem('username');
+        if(resData && resData.status == 'ok'){
+          localStorage.setItem('username', resData.data.username);
+          if(to.path == '/login'){
+            next('/dashboard');
+          }
+          NProgress.done()
+        }else{
+          localStorage.removeItem('username');
+          next({ path: '/login' })
+          NProgress.done()
+        }
+      }
+    ).catch( (err) => {
         localStorage.removeItem('username');
         next({ path: '/login' })
-        NProgress.done()
-      }
-    }
-  ).catch( (err) => {
-    localStorage.removeItem('username');
-    store.dispatch('FedLogOut').then(() => {
-      Message.error('验证失败,请重新登录')
-      next({ path: '/login' })
     })
-  })
+  }
   next();
-  // if (getToken()) {
-  //   if (to.path === '/login') {
-  //     next({ path: '/' })
-  //   } else {
-  //     next();
-  //     // if (store.getters.roles.length === 0) {
-  //     //   store.dispatch('GetInfo').then(res => { // 拉取用户信息
-  //     //     next()
-  //     //   }).catch(() => {
-  //     //     store.dispatch('FedLogOut').then(() => {
-  //     //       Message.error('验证失败,请重新登录')
-  //     //       next({ path: '/login' })
-  //     //     })
-  //     //   })
-  //     // } else {
-  //     //   next()
-  //     // }
-  //   }
-  // } else {
-  //   if (whiteList.indexOf(to.path) !== -1) {
-  //     next()
-  //   } else {
-  //     next('/login')
-  //     NProgress.done()
-  //   }
-  // }
+  
+
 })
 
 router.afterEach(() => {

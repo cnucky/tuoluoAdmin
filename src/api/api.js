@@ -3,7 +3,7 @@ import { fetch } from '@/api/index'
 //登录
 export const login = (reqData) => fetch('POST','/api/admin/login/',{data: reqData})
 //退出
-export const loginOut = () => fetch('GET','/adminapi/logout/')
+export const loginOut = () => fetch('GET','/api/admin/logout/')
 
 //判断用户是否登录
 export const checkLogin = () => fetch('GET','/api/admin/auth_info/')
