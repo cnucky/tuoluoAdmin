@@ -64,7 +64,6 @@ export const constantRouterMap = [
   {
     path:'/it',
     component: Layout,
-    name:'Data',
     meta: { title: 'IT中心', icon: '' },
     children:[
 
@@ -99,7 +98,6 @@ export const constantRouterMap = [
   {
     path:'/users',
     component: Layout,
-    name:'Users',
     meta: { title: '用户中心', icon: '' },
     children:[
       {
@@ -119,7 +117,6 @@ export const constantRouterMap = [
   {
     path: '/cms',
     component: Layout,
-    name:'Cms',
     meta: { title: '游戏中心', icon: '' },
     children: [
       {
@@ -146,7 +143,6 @@ export const constantRouterMap = [
   {
     path: '/recharge',
     component: Layout,
-    name:'Recharge',
     meta: { title: '结算中心', icon: '' },
     children: [
       {
@@ -167,7 +163,6 @@ export const constantRouterMap = [
   {
     path: '/serviecs',
     component: Layout,
-    name:'Serviecs',
     meta: { title: '客服中心', icon: '' },
     children: [
       {
@@ -194,7 +189,6 @@ export const constantRouterMap = [
   {
     path: '/promotion',
     component: Layout,
-    name:'Promotion',
     meta: { title: '推广中心', icon: '' },
     children: [
       {
@@ -210,11 +204,8 @@ export const constantRouterMap = [
         meta: { title: '推广情况', icon: '' }
       }
      
-     
     ]
   },
- 
-
   {
     path: '/account',
     component: Layout,
