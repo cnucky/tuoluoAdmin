@@ -12,19 +12,30 @@ const login = () => import('@/views/login/index')
 
 
 const Layout = () => import('@/views/layout/index')
-const dashboard = () => import('@/views/dashboard/index')
-const accountRight = () => import('@/views/account/index')
-const gameData = () => import('@/views/dataManage/game')
-const userData = () => import('@/views/dataManage/user')
-const rechargeData = () => import('@/views/dataManage/recharge')
-const distributeData = () => import('@/views/dataManage/distribute')
-const pcData = () => import('@/views/dataManage/pc')
-const websiteData = () => import('@/views/dataManage/website')
-const inStation = () => import('@/views/inStation/index')
-const serverManage = () => import('@/views/serverManage/index')  //服务器管理
-const versionManage = () => import('@/views/versionManage/index')  //版本管理
-const cms = () => import('@/views/cms/index')  //服务器管理
-const feedbackManage = () => import('@/views/feedbackManage/index')  //反馈管理
+const dashboard = () => import('@/views/dashboard/index')  //首页
+const accountRight = () => import('@/views/account/index')   //账户管理
+
+const registerUsersData = () => import('@/views/userCenter/registerUsers')   //注册用户
+const rechargeUsersData = () => import('@/views/userCenter/rechargeUsers')   //付费用户
+
+const serverManage = () => import('@/views/itCenter/server')  //服务器管理
+const versionManage = () => import('@/views/itCenter/version')  //版本管理
+const lineManage = () => import('@/views/itCenter/line')  //线路管理
+const websiteData = () => import('@/views/itCenter/website')  //官网管理
+
+const gamesManage = () => import('@/views/cms/index')  //游戏管理
+const navBarsManage = () => import('@/views/cms/navbars')  //底部导航管理
+const rechargeAmount = () => import('@/views/cms/rechargeAmount')  //充值面额管理
+
+const income = () => import('@/views/settlements/income')  //收入
+const expend = () => import('@/views/settlements/expend')  //支出
+
+const feedbackManage = () => import('@/views/customService/feedbackManage')  //反馈管理
+const pushMessage = () => import('@/views/customService/pushMessage')  //站内信
+const refundment = () => import('@/views/customService/refundment')  //退款管理
+
+const channelManage = () => import('@/views/promotionCenter/channel')  //渠道管理
+const promotionInfo = () => import('@/views/promotionCenter/promotionInfo')  //推广详情
 
 
 /**
@@ -46,115 +57,164 @@ export const constantRouterMap = [
       path: 'dashboard',
       name:'Dashboard',
       component: dashboard,
-      meta: { title: '控制台', icon: 'el-icon-menu' }
+      meta: { title: '首页-工作台', icon: '' }
     }]
   },
   
   {
-    path:'/data',
+    path:'/it',
     component: Layout,
     name:'Data',
-    meta: { title: '数据管理', icon: 'el-icon-message' },
+    meta: { title: 'IT中心', icon: '' },
     children:[
+
       {
-        path:'game',
-        name:'GameData',
-        component: gameData,
-        meta: { title: '游戏数据', icon: '' },
+        path: 'server',
+        name: 'ServerManage',
+        component: serverManage,
+        meta: { title: '服务器管理', icon: '' }
       },
       {
-        path:'user',
-        name:'UserData',
-        component: userData,
-        meta: { title: '用户数据', icon: '' },
+        path: 'version',
+        name: 'VersionManage',
+        component: versionManage,
+        meta: { title: '版本管理', icon: '' }
       },
       {
-        path:'distribute',
-        name:'DistributeData',
-        component: distributeData,
-        meta: { title: '分发渠道数据', icon: '' },
-      },
-      {
-        path:'recharge',
-        name:'RechargeData',
-        component: rechargeData,
-        meta: { title: '充值数据', icon: '' },
+        path: 'line',
+        name: 'LineManage',
+        component: lineManage,
+        meta: { title: '线路管理', icon: '' }
       },
       {
         path:'website',
         name:'WebsiteData',
         component: websiteData,
-        meta: { title: '网站数据', icon: '' },
-      },
-      {
-        path:'pc',
-        name:'PcData',
-        component: pcData,
-        meta: { title: 'PC客户端数据', icon: '' },
+        meta: { title: '官网管理', icon: '' },
       }
     ]
 
   },
+  
   {
-    path: '/instation',
+    path:'/users',
     component: Layout,
-    children: [
+    name:'Users',
+    meta: { title: '用户中心', icon: '' },
+    children:[
       {
-        path: '',
-        name: 'InStation',
-        component: inStation,
-        meta: { title: '站内信', icon: 'el-icon-star-on' }
-      }
-    ]
-  },
-  {
-    path: '/server',
-    component: Layout,
-    children: [
+        path:'register',
+        name:'registerUsersData',
+        component: registerUsersData,
+        meta: { title: '注册用户', icon: '' },
+      },
       {
-        path: '',
-        name: 'ServerManage',
-        component: serverManage,
-        meta: { title: '服务器管理', icon: 'el-icon-goods' }
+        path:'recharge',
+        name:'rechargeUsersData',
+        component: rechargeUsersData,
+        meta: { title: '付费用户', icon: '' },
       }
     ]
   },
   {
     path: '/cms',
     component: Layout,
+    name:'Cms',
+    meta: { title: '游戏中心', icon: '' },
     children: [
       {
-        path: '',
-        name: 'Cms',
-        component: cms,
-        meta: { title: 'CMS', icon: 'el-icon-tickets' }
+        path: 'games',
+        name: 'GamesManage',
+        component: gamesManage,
+        meta: { title: '游戏管理', icon: '' }
+      },
+      {
+        path: 'nav_bars',
+        name: 'NavBarsManage',
+        component: navBarsManage,
+        meta: { title: '底部导航管理', icon: '' }
+      },
+      {
+        path: 'recharge_amount',
+        name: 'RechargeAmount',
+        component: rechargeAmount,
+        meta: { title: '充值面额管理', icon: '' }
       }
+      
     ]
   },
   {
-    path: '/version',
+    path: '/recharge',
     component: Layout,
+    name:'Recharge',
+    meta: { title: '结算中心', icon: '' },
     children: [
       {
-        path: '',
-        name: 'VersionManage',
-        component: versionManage,
-        meta: { title: '版本管理', icon: 'el-icon-mobile-phone' }
-      }
+        path: 'income',
+        name: 'Income',
+        component: income,
+        meta: { title: '收入', icon: '' }
+      },
+      {
+        path: 'expend',
+        name: 'eExpend',
+        component: expend,
+        meta: { title: '支出', icon: '' }
+      },
+     
     ]
   },
   {
-    path: '/feedback',
+    path: '/serviecs',
     component: Layout,
+    name:'Serviecs',
+    meta: { title: '客服中心', icon: '' },
     children: [
       {
-        path: '',
+        path: 'feedback',
         name: 'FeedbackManage',
         component: feedbackManage,
-        meta: { title: '反馈管理', icon: 'el-icon-remove-outline' }
-      }
+        meta: { title: '反馈管理', icon: '' }
+      },
+      {
+        path: 'push_message',
+        name: 'PushMessage',
+        component: pushMessage,
+        meta: { title: '站内信', icon: '' }
+      },
+      {
+        path: 'refundment',
+        name: 'Refundment',
+        component: refundment,
+        meta: { title: '退款管理', icon: '' }
+      },
+     
     ]
   },
+  {
+    path: '/promotion',
+    component: Layout,
+    name:'Promotion',
+    meta: { title: '推广中心', icon: '' },
+    children: [
+      {
+        path:'channel_manage',
+        name:'ChannelManage',
+        component: channelManage,
+        meta: { title: '渠道管理', icon: '' },
+      },
+      {
+        path: 'promotion_info',
+        name: 'PromotionInfo',
+        component: promotionInfo,
+        meta: { title: '推广情况', icon: '' }
+      }
+     
+     
+    ]
+  },
+ 
+
   {
     path: '/account',
     component: Layout,
@@ -166,7 +226,7 @@ export const constantRouterMap = [
         path: '',
         name: 'Account',
         component: accountRight,
-        meta: { title: '角色管理', icon: 'el-icon-setting' }
+        meta: { title: '账号管理', icon: '' }
       }
     ]
   },

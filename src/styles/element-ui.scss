@@ -34,5 +34,6 @@
   border-color:  $theme-color;
   &:hover,&:active,&:focus{
     background: $theme-color;
+    border-color:  $theme-color;
   }
 }
