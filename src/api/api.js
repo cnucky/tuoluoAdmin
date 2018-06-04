@@ -11,6 +11,13 @@ export const checkLogin = () => fetch('GET','/api/admin/auth_info/')
 //获取用户
 export const getCustomers = () => fetch('GET','/adminapi/customers/')
 
+export const addGames = (data) => fetch('POST','/api/admin/game/',{data:data})
+
+
+
+
+
+
 //赠送天数
 export const setExtraDays = (param,reqData) => fetch('POST',`/adminapi/customers/${param.id}/set_customer_extra/`,{data: reqData})
 //设置邀请码
