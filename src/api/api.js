@@ -11,7 +11,9 @@ export const checkLogin = () => fetch('GET','/api/admin/auth_info/')
 //获取用户
 export const getCustomers = () => fetch('GET','/adminapi/customers/')
 
-export const addGames = (data) => fetch('POST','/api/admin/game/',{data:data})
+export const addGames = (data) => fetch('POST','/api/admin/game/',{data:data})  //添加游戏
+export const getGamesList = (param) => fetch('GET',`/api/admin/game/?type=${param.type}`)  //获取游戏列表
+
 
 
 
