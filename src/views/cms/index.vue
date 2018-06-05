@@ -231,7 +231,9 @@ export default {
         },
         getGamesListData(){
             const param = {
-                type: this.form.type
+                type: this.form.type,
+                page: this.currentPage,
+                page_size: this.pageSize
             }
             getGamesList(param).then(
                 res =>{
@@ -254,6 +256,8 @@ export default {
         },
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
+            this.currentPage = val;
+            this.getGamesListData();
         }
         
     }

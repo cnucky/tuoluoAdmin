@@ -12,7 +12,7 @@ export const checkLogin = () => fetch('GET','/api/admin/auth_info/')
 export const getCustomers = () => fetch('GET','/adminapi/customers/')
 
 export const addGames = (data) => fetch('POST','/api/admin/game/',{data:data})  //添加游戏
-export const getGamesList = (param) => fetch('GET',`/api/admin/game/?type=${param.type}`)  //获取游戏列表
+export const getGamesList = (param) => fetch('GET',`/api/admin/game/?type=${param.type}&page=${param.page}&page_size=${param.page_size}`)  //获取游戏列表
 
 export const delGame = (param) => fetch('DELETE',`/api/admin/game/${param.id}/`)  //删除游戏
 export const updateGame = (param,data) => fetch('PUT',`/api/admin/game/${param.id}/`,{data: data})  //修改游戏
