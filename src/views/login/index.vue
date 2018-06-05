@@ -156,7 +156,7 @@ export default {
     .el-input {
       display: inline-block;
       height: 47px;
-      width: 95%;
+      width: 100%;
     }
     .tips {
       font-size: 14px;

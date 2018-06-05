@@ -36,7 +36,7 @@
             </div>
         </div>
         <!-- 添加游戏 -->
-        <el-dialog title="添加游戏" :visible.sync="dialogFormVisible" width="40%">
+        <el-dialog :title="modalTitle" :visible.sync="dialogFormVisible" width="40%">
             <el-form :model="form" ref="form" label-width="100px" :rules="rule">
                 <el-form-item label="游戏名称" prop="name">
                     <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -64,7 +64,7 @@
 <script>
 import mixin from '../mixins/mixin'
 import navHead from '@/components/cmsNav'
-import {addGames,getGamesList} from '@/api/api'
+import {addGames,getGamesList,delGame,updateGame} from '@/api/api'
 export default {
     components:{navHead},
     data(){
@@ -91,7 +91,10 @@ export default {
             pageSizes:[20],
             pageSize: 20,
             total: 0,
-            currentPage: 1
+            currentPage: 1,
+            opeType: '',
+            id:'',
+            modalTitle:'添加游戏'
         }
     },
     mixins: [ mixin ],
@@ -107,9 +110,7 @@ export default {
 
         }
     },
-    mounted(){
-        this.getGamesListData();
-    },
+    
     methods:{
         getActiveIndex(index){
             this.activeIndex = index;
@@ -126,28 +127,51 @@ export default {
 
         },
         handleEdit(row){
-            console.log(row);
             this.dialogFormVisible = true;
             this.form.name = row.name;
             this.form.image_url = row.image_url;
             this.imageUrl = row.image_url;
+            this.opeType = 'update';
+            this.id = row.id;
+            this.modalTitle = '修改游戏';
         },
-        handleDel(){
-
+        handleDel(row){
+            const param = {
+                id: row.id
+            }
+            delGame(param).then(
+                res =>{
+                    this.$message.success('删除成功');
+                    this.getGamesListData();
+                }
+            ).catch(
+                err =>{
+                    console.log(err);
+                }
+            )
         },
         addNewGame(){
             this.dialogFormVisible = true;
+            this.form.name = "";
+            this.form.image_url = "";
+            this.imageUrl = "";
+            this.opeType = 'add';
+            this.modalTitle = '添加游戏';
         },
         handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
             this.form.image_url = res.url;
         },
         beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg';
+            console.log(file);
+            let isJPG = false;
+            let type = file.type;
+            if(type === 'image/jpeg' || type === 'image/png' || type === 'image/jpg'){
+                isJPG = true
+            }
             const isLt2M = file.size / 1024 / 1024 < 2;
-
             if (!isJPG) {
-            this.$message.error('上传图标只能是 JPG 格式!');
+            this.$message.error('上传图标只能是 JPG/PNG 格式!');
             }
             if (!isLt2M) {
             this.$message.error('上传图标大小不能超过 2MB!');
@@ -157,21 +181,48 @@ export default {
         submitForm(formName){
             this.$refs[formName].validate((valid) => {
                 if (valid) {
+                    
                    const reqData = this.form;
-                   addGames(reqData).then(
-                       res =>{
-                           if(res && res.status == 'ok'){
-                               this.$message.success('添加成功');
-                           }else{
-                               this.$message.success('添加失败');
-                           }
-                           this.dialogFormVisible = false;
+                   console.log(this.opeType);
+
+                   if(this.opeType == 'add'){
+                       addGames(reqData).then(
+                            res =>{
+                                if(res && res.status == 'ok'){
+                                    this.$message.success('添加成功');
+                                    this.getGamesListData();
+                                }else{
+                                    this.$message.success('添加失败');
+                                }
+                                this.dialogFormVisible = false;
+                            }
+                        ).catch(
+                            err=>{
+                                console.log(err);
+                            }
+                        )
+                   }else if(this.opeType == 'update'){
+                       const param = {
+                           id: this.id
                        }
-                   ).catch(
-                       err=>{
-                           console.log(err);
-                       }
-                   )
+                       updateGame(param,reqData).then(
+                            res =>{
+                                if(res && res.status == 'ok'){
+                                    this.$message.success('修改成功');
+                                    this.getGamesListData();
+                                }else{
+                                    this.$message.success('修改失败');
+                                }
+                                this.dialogFormVisible = false;
+                            }
+                        ).catch(
+                            err=>{
+                                console.log(err);
+                            }
+                        )
+                   }
+
+                   
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -232,8 +283,8 @@ export default {
         text-align: center;
     }
     .avatar {
-        width: 178px;
-        height: 178px;
+        width: 136px;
+        height: 136px;
         display: block;
     }
     .operate_btns{

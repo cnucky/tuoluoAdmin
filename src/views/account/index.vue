@@ -89,7 +89,7 @@ export default {
     }
   },
   created () {
-    this.get_customers();
+    // this.get_customers();
   },
   methods: {
     get_customers(){
@@ -106,32 +106,32 @@ export default {
       var param = {
         id: row.id
       }
-      setAdmin(param).then(
-        (resData) => {
-          if(resData && resData.status == 'ok'){
-            this.$message.success('设置管理员成功');   
-            this.get_customers();   //刷新列表   
-          }else{
-            this.$message.success('设置管理员失败');  
-          }
-        }
-      )
+      // setAdmin(param).then(
+      //   (resData) => {
+      //     if(resData && resData.status == 'ok'){
+      //       this.$message.success('设置管理员成功');   
+      //       this.get_customers();   //刷新列表   
+      //     }else{
+      //       this.$message.success('设置管理员失败');  
+      //     }
+      //   }
+      // )
     },
     //取消管理员
     handleCancelAdmin(index, row) {
       var param = {
         id: row.id
       }
-      setAdminNormal(param).then(
-        (resData) => {
-          if(resData && resData.status == 'ok'){
-            this.$message.success('取消管理员成功');   
-            this.get_customers();   //刷新列表   
-          }else{
-            this.$message.success('取消管理员失败');  
-          }
-        }
-      )
+      // setAdminNormal(param).then(
+      //   (resData) => {
+      //     if(resData && resData.status == 'ok'){
+      //       this.$message.success('取消管理员成功');   
+      //       this.get_customers();   //刷新列表   
+      //     }else{
+      //       this.$message.success('取消管理员失败');  
+      //     }
+      //   }
+      // )
     },
     
     //赠送天数
