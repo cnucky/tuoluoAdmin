@@ -248,6 +248,7 @@ router.beforeEach((to, from, next) => {
           if(to.path == '/login'){
             next('/dashboard');
           }
+          next();
           NProgress.done()
         }else{
           localStorage.removeItem('username');
@@ -259,8 +260,11 @@ router.beforeEach((to, from, next) => {
         localStorage.removeItem('username');
         next({ path: '/login' })
     })
+  }else{
+    next();
   }
-  next();
+
+  
   
 
 })

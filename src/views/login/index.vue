@@ -141,9 +141,18 @@ export default {
       background: url('../../assets/logbg.jpg') no-repeat;
     }
     input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0px 1000px #293444 inset !important;
+      // -webkit-box-shadow: 0 0 0px 1000px #293444 inset !important;
       -webkit-text-fill-color: #fff !important;
+      animation: setbackgroundcolor;
+      animation-fill-mode: forwards;
     }
+
+    @keyframes setbackgroundcolor {
+      to {
+          background: transparent;
+      }
+    }
+
     input {
       background: transparent;
       border: 0px;

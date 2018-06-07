@@ -18,6 +18,18 @@ export const delGame = (param) => fetch('DELETE',`/api/admin/game/${param.id}/`)
 export const updateGame = (param,data) => fetch('PUT',`/api/admin/game/${param.id}/`,{data: data})  //修改游戏
 
 
+export const addAmount = (data) => fetch('POST',`/api/admin/recharge/`,{data: data})  //添加面额
+
+export const getAmountList = (param) => fetch('GET',`/api/admin/recharge/?origin=${param.type}`)  //面额列表
+
+export const delAmount = (param) => fetch('DELETE',`/api/admin/recharge/${param.id}/`)  //删除面额
+
+
+ 
+
+ 
+
+
 
 
 

@@ -103,6 +103,7 @@ export default {
             if(newVal == oldVal){
                 return;
             }else{
+                this.loading = true;
                 this.form.name = '';
                 this.form.image_url = '';
                 this.imageUrl = '';
