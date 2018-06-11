@@ -15,8 +15,7 @@ const Layout = () => import('@/views/layout/index')
 const dashboard = () => import('@/views/dashboard/index')  //首页
 const accountRight = () => import('@/views/account/index')   //账户管理
 
-const registerUsersData = () => import('@/views/userCenter/registerUsers')   //注册用户
-const rechargeUsersData = () => import('@/views/userCenter/rechargeUsers')   //付费用户
+const usersManage = () => import('@/views/userCenter/usersManage')   //付费用户
 
 const serverManage = () => import('@/views/itCenter/server')  //服务器管理
 const versionManage = () => import('@/views/itCenter/version')  //版本管理
@@ -101,16 +100,10 @@ export const constantRouterMap = [
     meta: { title: '用户中心', icon: '' },
     children:[
       {
-        path:'register',
-        name:'registerUsersData',
-        component: registerUsersData,
-        meta: { title: '注册用户', icon: '' },
-      },
-      {
         path:'recharge',
-        name:'rechargeUsersData',
-        component: rechargeUsersData,
-        meta: { title: '付费用户', icon: '' },
+        name:'UsersManage',
+        component: usersManage,
+        meta: { title: '用户管理', icon: '' },
       }
     ]
   },

@@ -9,7 +9,7 @@ export const loginOut = () => fetch('GET','/api/admin/logout/')
 export const checkLogin = () => fetch('GET','/api/admin/auth_info/')
 
 //获取用户
-export const getCustomers = () => fetch('GET','/adminapi/customers/')
+export const getCustomers = (param) => fetch('GET',`/api/admin/customer/?page=${param.page}&page_size=${param.page_size}`)//获取账号列表
 
 export const addGames = (data) => fetch('POST','/api/admin/game/',{data:data})  //添加游戏
 export const getGamesList = (param) => fetch('GET',`/api/admin/game/?type=${param.type}&page=${param.page}&page_size=${param.page_size}`)  //获取游戏列表
@@ -25,7 +25,8 @@ export const getAmountList = (param) => fetch('GET',`/api/admin/recharge/?origin
 export const delAmount = (param) => fetch('DELETE',`/api/admin/recharge/${param.id}/`)  //删除面额
 
 
- 
+
+
 
  
 

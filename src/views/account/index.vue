@@ -37,8 +37,8 @@
         <el-button size="mini" type="warning" v-else
           @click="handleCancelAdmin(scope.$index, scope.row)">取消管理员</el-button>
           
-          <el-button size="mini" type="primary"
-          @click="handleSetInviteCode(scope.$index, scope.row)">设置邀请码 </el-button>
+          <!-- <el-button size="mini" type="primary"
+          @click="handleSetInviteCode(scope.$index, scope.row)">设置邀请码 </el-button> -->
           <el-button size="mini" type="danger"
           @click="handleRecharge(scope.$index, scope.row)">赠送天数</el-button>
       </template>
