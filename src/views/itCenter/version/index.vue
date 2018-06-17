@@ -8,6 +8,11 @@
             <el-table-column prop="version" label="版本号" width="250px"></el-table-column>
             <el-table-column prop="origin_str" width="120px" label="版本类型"></el-table-column>
             <el-table-column prop="front_str" width="120px" label="终端类型"></el-table-column>
+            <el-table-column width="160px" label="添加时间">
+                <template slot-scope="scope">
+                    {{date(scope.row.created_at)}}
+                </template>
+            </el-table-column>
             <el-table-column label="是否是最新版本" width="120px">
             <template slot-scope="scope">
                 <!-- 是 -->
@@ -35,6 +40,8 @@
 
 <script>
 import{getPackageList} from '@/api/api'
+import moment from 'moment'
+moment.locale('zh-cn')
 export default {
     data(){
         return{
@@ -48,6 +55,9 @@ export default {
         this.getVersionList();
     },
     methods:{
+        date (date) {
+            return moment(date).format('YYYY-MM-DD HH:mm:ss')
+        },
         addNewVersion(){
             this.$router.push({name:'VersionEdit'});
         },
