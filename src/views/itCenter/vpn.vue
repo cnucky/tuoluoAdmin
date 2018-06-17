@@ -7,6 +7,11 @@
             <el-table-column prop="id" label="ID" width="160px"></el-table-column>
             <el-table-column prop="ip" label="IP"></el-table-column>
             <el-table-column prop="tun_port" label="端口"></el-table-column>
+            <el-table-column label="带宽">
+                <template slot-scope="scope">
+                    {{scope.row.band}}M
+                </template>
+            </el-table-column>
            
         </el-table>
         <!-- 分页 -->
@@ -29,6 +34,11 @@
                 <el-form-item label="线路ip" prop="ip">
                     <el-input v-model="form.ip" auto-complete="off"></el-input>
                 </el-form-item>
+                <el-form-item label="带宽大小" prop="band">
+                    <el-input v-model="form.band" auto-complete="off"></el-input>
+                </el-form-item>
+
+                
                 <el-form-item class="modal_footer">
                     <el-button @click="dialogFormVisible = false">取 消</el-button>
                     <el-button type="primary" @click="submitForm('form')">确 定</el-button>
@@ -53,7 +63,8 @@ export default {
             dialogFormVisible: false,
             form:{
                 name:'',
-                ip:''
+                ip:'',
+                band:''
             },
             modalTitle: '添加线路',
             modalRules:{
@@ -62,6 +73,9 @@ export default {
                 ],
                 ip:[
                     { required: true, message: '请输入线路ip', trigger: 'blur' }
+                ],
+                band:[
+                    { required: true, message: '请输入带宽', trigger: 'blur' }
                 ]
             }
         }
@@ -75,6 +89,7 @@ export default {
             this.dialogFormVisible = true;
             this.form.name = '';
             this.form.ip = '';
+            this.form.band = '';
         },
         getVpnListData(){
             const param = {

@@ -4,7 +4,7 @@
         <div class="add_amount">
             <el-form :model="form" :inline="true" :rules="rules2" ref="form" label-width="80px" class="demo-ruleForm">
                 <el-form-item label="充值面额" prop="money">
-                    <el-input v-model.number="form.money" auto-complete="off"></el-input>分
+                    <el-input v-model.number="form.money" auto-complete="off"></el-input>元
                 </el-form-item>
                 <el-form-item label="时间" prop="day">
                     <el-input v-model.number="form.day" auto-complete="off"></el-input>
@@ -28,7 +28,7 @@
             <el-table :data="tableData" v-loading="loading" border style="width: 70%">
                 <el-table-column label="面额">
                     <template slot-scope="scope">
-                        <span>{{scope.row.money}}分</span>
+                        <span>{{scope.row.money}}元</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="时间">
