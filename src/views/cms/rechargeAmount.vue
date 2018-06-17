@@ -7,9 +7,9 @@
                     <el-input v-model.number="form.money" auto-complete="off"></el-input>元
                 </el-form-item>
                 <el-form-item label="时间" prop="day">
-                    <el-input v-model.number="form.day" auto-complete="off"></el-input>
+                    <el-input v-model.number="form.day" auto-complete="off"></el-input>天
                 </el-form-item>
-                <el-form-item>
+                <!-- <el-form-item>
                     <el-select class="date_unit" v-model="day" placeholder="请选择">
                         <el-option
                         v-for="item in options"
@@ -18,7 +18,7 @@
                         :value="item.value">
                         </el-option>
                     </el-select>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('form')">添加</el-button>
                     <el-button @click="resetForm('form')">重置</el-button>
@@ -28,7 +28,7 @@
             <el-table :data="tableData" v-loading="loading" border style="width: 70%">
                 <el-table-column label="面额">
                     <template slot-scope="scope">
-                        <span>{{scope.row.money}}元</span>
+                        <span>{{scope.row.money_yuan}}元</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="时间">
