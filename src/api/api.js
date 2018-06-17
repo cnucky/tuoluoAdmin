@@ -24,6 +24,12 @@ export const getAmountList = (param) => fetch('GET',`/api/admin/recharge/?origin
 
 export const delAmount = (param) => fetch('DELETE',`/api/admin/recharge/${param.id}/`)  //删除面额
 
+//版本管理
+export const addPackage = (data) => fetch('POST',`/api/admin/package/`,{data: data})  //添加版本
+export const getPackageList = (param) => fetch('GET',`/api/admin/package/?page=${param.page}&page_size=${param.page_size}`)  //版本列表
+
+
+
 
 
 

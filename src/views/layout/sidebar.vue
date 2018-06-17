@@ -1,5 +1,5 @@
 <template>
-    <el-menu mode="vertical" unique-opened :default-active="$route.path" :collapse="isCollapse" :router="true" background-color="#304156" text-color="#fff" active-text-color="#00ccff" class="menu-wrapper"> 
+    <el-menu :default-active="defaultActiveMenu" mode="vertical" unique-opened :collapse="isCollapse" :router="true" background-color="#304156" text-color="#fff" active-text-color="#00ccff" class="menu-wrapper"> 
       <template v-for="item in routes" v-if="!item.hidden&&item.children">   
         
         <el-menu-item v-if="item.children.length===1 && !item.children[0].children" :index="item.path+'/'+item.children[0].path" :key="item.children[0].name" class='submenu-title-noDropdown'>
@@ -28,7 +28,6 @@
 import { mapGetters } from 'vuex'
 
 
-
 export default {
  
   computed: {
@@ -40,6 +39,16 @@ export default {
     },
     isCollapse() {
       return !this.sidebar.opened
+    },
+    defaultActiveMenu() {
+      // 详情页--实现对应菜单高亮
+      const path = this.$route.path;
+      if(path == '/dashboard'){
+        return this.$route.matched[0].path;
+      }else{
+        return this.$route.matched[1].path;
+      }
+			
     }
   }
 }

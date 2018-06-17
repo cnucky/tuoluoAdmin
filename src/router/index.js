@@ -9,7 +9,7 @@ Vue.use(Router)
 
 /* Layout */
 const login = () => import('@/views/login/index')
-
+const Tpl = () => import('@/views/tpl')
 
 const Layout = () => import('@/views/layout/index')
 const dashboard = () => import('@/views/dashboard/index')  //首页
@@ -18,7 +18,9 @@ const accountRight = () => import('@/views/account/index')   //账户管理
 const usersManage = () => import('@/views/userCenter/usersManage')   //付费用户
 
 const serverManage = () => import('@/views/itCenter/server')  //服务器管理
-const versionManage = () => import('@/views/itCenter/version')  //版本管理
+const versionManage = () => import('@/views/itCenter/version/index')  //版本管理
+const versionEdit = () => import('@/views/itCenter/version/edit')  //版本管理
+
 const lineManage = () => import('@/views/itCenter/line')  //线路管理
 const websiteData = () => import('@/views/itCenter/website')  //官网管理
 
@@ -65,7 +67,6 @@ export const constantRouterMap = [
     component: Layout,
     meta: { title: 'IT中心', icon: '' },
     children:[
-
       {
         path: 'server',
         name: 'ServerManage',
@@ -74,9 +75,23 @@ export const constantRouterMap = [
       },
       {
         path: 'version',
-        name: 'VersionManage',
-        component: versionManage,
-        meta: { title: '版本管理', icon: '' }
+        component: Tpl,
+        name:'VersionManage',
+        meta: { title: '版本管理', icon: '' },
+        children:[
+          {
+            path: '',
+            name: 'VersionManage',
+            component: versionManage,
+            meta: { title: '版本管理', icon: '' },
+          },
+          {
+            path: 'version_edit',
+            name: 'VersionEdit',
+            component: versionEdit,
+            meta: { title: '添加新版本', icon: '' }
+          }
+        ]
       },
       {
         path: 'line',
