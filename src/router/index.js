@@ -21,7 +21,7 @@ const serverManage = () => import('@/views/itCenter/server')  //服务器管理
 const versionManage = () => import('@/views/itCenter/version/index')  //版本管理
 const versionEdit = () => import('@/views/itCenter/version/edit')  //版本管理
 
-const lineManage = () => import('@/views/itCenter/line')  //线路管理
+const vpnManage = () => import('@/views/itCenter/vpn')  //线路管理
 const websiteData = () => import('@/views/itCenter/website')  //官网管理
 
 const gamesManage = () => import('@/views/cms/index')  //游戏管理
@@ -94,9 +94,9 @@ export const constantRouterMap = [
         ]
       },
       {
-        path: 'line',
-        name: 'LineManage',
-        component: lineManage,
+        path: 'vpn',
+        name: 'VpnManage',
+        component: vpnManage,
         meta: { title: '线路管理', icon: '' }
       },
       {

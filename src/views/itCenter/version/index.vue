@@ -69,7 +69,7 @@ export default {
             getPackageList(param).then(
                 res => {
                     this.tableData = res.results;
-                    this.total = this.count;
+                    this.total = res.count;
                 }
             )
         },

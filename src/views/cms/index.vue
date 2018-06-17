@@ -29,7 +29,7 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-sizes="pageSizes"
-                :page-size="100"
+                :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="total">
                 </el-pagination>

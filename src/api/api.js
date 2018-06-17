@@ -27,8 +27,11 @@ export const delAmount = (param) => fetch('DELETE',`/api/admin/recharge/${param.
 //版本管理
 export const addPackage = (data) => fetch('POST',`/api/admin/package/`,{data: data})  //添加版本
 export const getPackageList = (param) => fetch('GET',`/api/admin/package/?page=${param.page}&page_size=${param.page_size}`)  //版本列表
+export const addVpn = (data) => fetch('POST',`/api/admin/vpns/`,{data: data})  //添加线路
+export const getVpnList = (param) => fetch('GET',`/api/admin/vpns/?page=${param.page}&page_size=${param.page_size}`)  //线路管理
 
 
+export const getOrdersList = (param) => fetch('GET',`/api/admin/orders/?page=${param.page}&page_size=${param.page_size}`)  //线路管理
 
 
 
