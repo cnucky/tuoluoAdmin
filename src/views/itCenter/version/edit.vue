@@ -19,6 +19,16 @@
                     <el-radio :label="3">PC</el-radio>
                 </el-radio-group>
             </el-form-item>
+            <el-form-item label="渠道" prop="pipe_id">
+                <el-select v-model="ruleForm2.pipe_id" placeholder="请选择">
+                    <el-option
+                    v-for="item in pipeOptions"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+                    </el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item label="是否最新版本" prop="now">
                 <el-select v-model="ruleForm2.now" placeholder="请选择">
                     <el-option
@@ -42,7 +52,7 @@
 </template>
 
 <script>
-import {addPackage} from '@/api/api'
+import {addPackage,getPipes} from '@/api/api'
 export default {
     data(){
         return{
@@ -51,6 +61,7 @@ export default {
                 origin:'',
                 front:'', //"终端类型 1：安卓， 2：苹果 3：PC",
                 now:'',//是否最新版本
+                pipe_id:'',  //渠道
                 desc:''//版本描述
             },
             versionOptions:[
@@ -63,6 +74,7 @@ export default {
                     value: false
                 }
             ],
+            pipeOptions:[],
             rules2:{
                 version:[
                     { required: true, message: '请输入版本号', trigger: 'blur' }
@@ -73,6 +85,9 @@ export default {
                 front:[
                     { required: true, message: '请选择终端类型', trigger: 'change' }
                 ],
+                pipe_id:[
+                    { required: true, message: '请选择渠道', trigger: 'blur' }
+                ],
                 now:[
                     { required: true, message: '请选择是否最新版本', trigger: 'blur' }
                 ]
@@ -80,7 +95,21 @@ export default {
             }
         }
     },
+    mounted(){
+         this.getPipesData();
+    },
     methods:{
+        getPipesData(){
+            getPipes().then(
+                res => {
+                    if(res && res.data){
+                        this.pipeOptions = res.data;
+                    }else{
+                        this.pipeOptions = [];
+                    }
+                }
+            )
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {

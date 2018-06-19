@@ -33,6 +33,10 @@ export const getVpnList = (param) => fetch('GET',`/api/admin/vpns/?page=${param.
 
 export const getOrdersList = (param) => fetch('GET',`/api/admin/orders/?page=${param.page}&page_size=${param.page_size}`)  //线路管理
 
+export const getPipes = () => fetch('GET',`/api/admin/pipes/`)  //新增渠道
+
+
+
 
 
 

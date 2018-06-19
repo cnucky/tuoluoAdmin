@@ -82,9 +82,10 @@ export default {
     },
     mounted(){
         this.getVpnListData();
+       
     },
     methods:{
-       
+        
         addVpn(){
             this.dialogFormVisible = true;
             this.form.name = '';

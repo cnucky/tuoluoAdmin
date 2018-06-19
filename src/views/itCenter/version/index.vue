@@ -8,6 +8,7 @@
             <el-table-column prop="version" label="版本号" width="250px"></el-table-column>
             <el-table-column prop="origin_str" width="120px" label="版本类型"></el-table-column>
             <el-table-column prop="front_str" width="120px" label="终端类型"></el-table-column>
+            <el-table-column prop="pipe_name" width="120px" label="渠道名称"></el-table-column>
             <el-table-column width="160px" label="添加时间">
                 <template slot-scope="scope">
                     {{date(scope.row.created_at)}}
