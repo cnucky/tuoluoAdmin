@@ -5,11 +5,13 @@
         </div>
         <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="id" label="ID" width="50px"></el-table-column>
-            <el-table-column prop="version" label="版本号" width="200px"></el-table-column>
+            <el-table-column prop="version" label="版本号" width="160px"></el-table-column>
+            <el-table-column prop="package_name" width="160px" label="安装包名称"></el-table-column>
             <el-table-column prop="origin_str" width="100px" label="版本类型"></el-table-column>
             <el-table-column prop="front_str" width="90px" label="终端类型"></el-table-column>
             <el-table-column prop="pipe_name" width="90px" label="渠道名称"></el-table-column>
             
+              
             <el-table-column prop="download_url" width="220px" label="下载地址"></el-table-column>
             <el-table-column width="160px" label="添加时间">
                 <template slot-scope="scope">
