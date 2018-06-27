@@ -102,8 +102,8 @@ export default {
         getPipesData(){
             getPipes().then(
                 res => {
-                    if(res && res.data){
-                        this.pipeOptions = res.data;
+                    if(res && res.results){
+                        this.pipeOptions = res.results;
                     }else{
                         this.pipeOptions = [];
                     }
