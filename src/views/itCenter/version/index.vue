@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="version_manage">
         <div class="btns">
             <el-button type="success" @click="addNewVersion">添加版本</el-button>
         </div>
@@ -12,7 +12,11 @@
             <el-table-column prop="pipe_name" width="90px" label="渠道名称"></el-table-column>
             
               
-            <el-table-column prop="download_url" width="220px" label="下载地址"></el-table-column>
+            <el-table-column width="220px" label="下载地址">
+                <template slot-scope="scope">
+                     <a :href="scope.row.download_url">立即下载</a> 
+                </template>
+            </el-table-column>
             <el-table-column width="160px" label="添加时间">
                 <template slot-scope="scope">
                     {{date(scope.row.created_at)}}
@@ -87,11 +91,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.btns{
-    text-align: left;
-    margin:0 0 20px 0;
+<style lang="scss">
+.version_manage{
+    .btns{
+        text-align: left;
+        margin:0 0 20px 0;
+    }
+    .cell{
+        a{
+            color:rgb(0, 204, 255);
+            text-decoration: underline;
+        }
+    }
 }
+
 </style>
 
 
