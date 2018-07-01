@@ -9,12 +9,13 @@
             <el-table :data="tableData" border v-loading="loading" style="width: 100%" :header-cell-style="headerRowStyle">
                 <el-table-column prop="id" label="ID" width="80px"></el-table-column>
                 <el-table-column prop="name" label="名称"></el-table-column>
+                <el-table-column prop="package_name" label="游戏包名"></el-table-column>
                 <el-table-column label="图标">
                      <template slot-scope="scope">
                         <img :src="scope.row.image_url" width="100px" alt="">
                     </template>
                 </el-table-column>
-                <!-- <el-table-column prop="name" label="提供商"></el-table-column>
+                <!-- 
                 <el-table-column prop="name" label="备注"></el-table-column> -->
                 <el-table-column fixed="right" label="操作" width="180">
                     <template slot-scope="scope">
@@ -40,6 +41,9 @@
             <el-form :model="form" ref="form" label-width="100px" :rules="rule">
                 <el-form-item label="游戏名称" prop="name">
                     <el-input v-model="form.name" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="游戏包名">
+                    <el-input v-model="form.package_name" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="游戏图标" prop="image_url">
                    <el-input v-model="form.image_url" class="icon_url" auto-complete="off"></el-input>
@@ -74,6 +78,7 @@ export default {
             dialogFormVisible: false,
             form:{
                 name:'',
+                package_name:'',
                 image_url:'',
                 type:''   //1 国内  2 国际  3 PC
             },
@@ -83,6 +88,9 @@ export default {
             rule:{
                 name:[
                     { required: true, message: '请输入名称', trigger: 'blur' }
+                ],
+                package_name:[
+                    { required: true, message: '请输入游戏包名', trigger: 'blur' }
                 ],
                 image_url:[
                     { required: true, message: '请上传图标', trigger: 'blur' }
@@ -105,6 +113,7 @@ export default {
             }else{
                 this.loading = true;
                 this.form.name = '';
+                this.form.package_name = '';
                 this.form.image_url = '';
                 this.imageUrl = '';
             }   
@@ -130,6 +139,7 @@ export default {
         handleEdit(row){
             this.dialogFormVisible = true;
             this.form.name = row.name;
+            this.form.package_name = row.package_name;
             this.form.image_url = row.image_url;
             this.imageUrl = row.image_url;
             this.opeType = 'update';
@@ -154,6 +164,7 @@ export default {
         addNewGame(){
             this.dialogFormVisible = true;
             this.form.name = "";
+            this.form.package_name = "";
             this.form.image_url = "";
             this.imageUrl = "";
             this.opeType = 'add';
@@ -164,7 +175,7 @@ export default {
             this.form.image_url = res.url;
         },
         beforeAvatarUpload(file) {
-            console.log(file);
+            //console.log(file);
             let isJPG = false;
             let type = file.type;
             if(type === 'image/jpeg' || type === 'image/png' || type === 'image/jpg'){
@@ -184,7 +195,7 @@ export default {
                 if (valid) {
                     
                    const reqData = this.form;
-                   console.log(this.opeType);
+                   //console.log(this.opeType);
 
                    if(this.opeType == 'add'){
                        addGames(reqData).then(
@@ -256,7 +267,7 @@ export default {
             console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
+            //console.log(`当前页: ${val}`);
             this.currentPage = val;
             this.getGamesListData();
         }
