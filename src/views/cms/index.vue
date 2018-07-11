@@ -117,10 +117,8 @@ export default {
                 this.form.image_url = '';
                 this.imageUrl = '';
             }   
-
         }
     },
-    
     methods:{
         getActiveIndex(index){
             this.activeIndex = index;
